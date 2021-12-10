@@ -2,3 +2,4 @@ src/golang.org
 .vscode
 bin
 pkg
+*.exe

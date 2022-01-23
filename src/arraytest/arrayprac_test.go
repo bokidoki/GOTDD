@@ -1,6 +1,8 @@
 package arraytest
 
 import (
+	"fmt"
+	"strconv"
 	"testing"
 )
 
@@ -18,4 +20,15 @@ func TestSum(t *testing.T) {
 func TestSizeOf(t *testing.T) {
 	var slice = []int{}
 	SizeOf(slice)
+}
+
+func TestSlice(t *testing.T) {
+	var arr = []int{1, 3, 4, 5}
+	printEach(arr[:]...)
+}
+
+func printEach(ints ...int) {
+	for i := 0; i < cap(ints); i++ {
+		fmt.Printf("%s", strconv.Itoa(ints[i]))
+	}
 }

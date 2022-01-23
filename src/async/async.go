@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"time"
 )
 
@@ -11,14 +10,22 @@ var (
 )
 
 func main() {
-	// fmt.Println("start main")
-	// go dosth()
-	// <-stop
-	// fmt.Println("get sth back")
-	// fmt.Println("main done")
-	for i := 0; i < 5; i++ {
-		defer fmt.Println(strconv.Itoa(i))
-	}
+	broad := make(chan int)
+	go func() {
+		for i := 0; i < 10; i++ {
+			broad <- i
+		}
+	}()
+
+	go func() {
+		for {
+			recv := <-broad
+			time.Sleep(time.Second * 3)
+			fmt.Println(recv)
+		}
+	}()
+
+	time.Sleep(time.Minute)
 }
 
 func dosth() {

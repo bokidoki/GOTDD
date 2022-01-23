@@ -34,3 +34,24 @@ func dosth() {
 	stop <- struct{}{}
 	fmt.Println("do sth done")
 }
+
+func doselect(c, quit chan int) {
+	x, y := 0, 1
+	for {
+		select {
+		case c <- x:
+			x, y = y, x+y
+			fmt.Println(x)
+			fmt.Println(y)
+		case <-quit:
+			fmt.Println("quit")
+			return
+		}
+	}
+}
+
+func testDefer() {
+	defer fmt.Println("defer 1")
+	defer fmt.Println("defer 2")
+	defer fmt.Println("defer 3")
+}
